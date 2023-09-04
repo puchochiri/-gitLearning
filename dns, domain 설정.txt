@@ -1,0 +1,161 @@
+도메인(DOMAIN)
+서버의 고유 IP는 유저들에게 친화적이지 않음
+NAVER.COM과 같은 도메인 주소 필요
+
+DNS _ Domain Name System
+웹사이트의 ip 주소와 도메인 주소를 이어주는 환경/시스템
+도메인과 연결된 IP 주소를 관리하는 서버
+
+HTTPs란 HyperText Transfer Protocol Secure Socket
+HTTP와 거의 동일, 데이터를 주고 받는 과정에 보안 요소가 추가
+서버와 클라이언트 사이의 모든 통신 내용이 암호화된다.
+HTTP 프로토콜에 SSL/TLS 암호화 프로토콜을 이용한 암호화 과정을 추가
+
+
+
+SSL 인증서
+1. 클라이언트가 접속한 서버가 신뢰할 수 있는 서버임을 보장
+2. SSL 통신에 사용할 공개키를 클라이언트에게 제공
+
+DNS 서버 구축
+https://it-serial.tistory.com/entry/Linux-CentOS-7-DNS-%EC%84%9C%EB%B2%84-%EA%B5%AC%EC%B6%95-%EB%8F%84%EB%A9%94%EC%9D%B8-%EC%84%A4%EC%A0%95
+
+DNS작동원리
+1) 웹 브라우저 주소창에 NAVER.COM을 입력하고 엔터
+2) 웹 브라우저 가까운 DNS 서버에 naver.com이란 도메인의 실제 IP 주소를 알고 있는지 물어봄
+3) 해당 dns 서버가 모른다면 다음 dns 서버에 물어본다.
+4) naver.com의 실제 주소를 알고 있는 해당 서버 IP주소를 알려준다.
+5) 웹 브라우저에서 NAVER.COM의 IP 주소로 페이지 조회 요청을 날린다.
+
+HTTPS 동작방식
+1) 서버관리자는 인증서 발급 기관을 통해 인증서 발급
+2) 인증서를 클라이언트와 통신하는 서버 인스턴스 웹 서버에 설치
+3) 이용지기 웹브라우저의 클라이언트에서 https:// 주소로 접속 시도
+4) https를 통해 SSL / TLS 암호화 통신을 요청하면 서버는 이를 전달
+위와 같은 방식으로 HTTPS를 이용한 통신 진행
+
+DNS에 HTTP 등록 
+1)UBUNTU
+https://headf1rst.github.io/infra/nginx-dns/
+
+
+tomcat https 적용
+https://inpa.tistory.com/entry/TOMCAT-%E2%9A%99%EF%B8%8F-SSL-%EC%84%A4%EC%A0%95-https
+https://namjackson.tistory.com/25
+
+
+
+
+centos7 SSL 인증서 발급 및 자동갱신
+https://blog.jiniworld.me/137
+main : named.conf
+back : named_backup.conf
+cp named.conf named_backup.conf
+cp named.rfc1912.zones named.rfc1912.zones.backup
+
+dwb.com
+
+[root@localhost ~]# named-checkconf /etc/named.conf
+/etc/named.rfc1912.zones:53: missing ';' before 'allow-update'
+
+cd /var/named
+cp named.localhost named.localhost.backup
+cp named.loopback named.loopback.backup
+cp ipname.zone ipname.zone.backup
+
+[root@localhost named]# cp -p named.localhost dwb.com.zone
+[root@localhost named]# cp -p named.loopback ipname.zone
+
+
+vi dwb.com.zone
+$TTL 1D
+@       IN SOA  dwb.com.        root (
+                                        0       ; serial
+                                        1D      ; refresh
+                                        1H      ; retry
+                                        1W      ; expire
+                                        3H )    ; minimum
+        IN NS   www.dwb.com.
+        IN A    112.172.129.156
+www     IN A    112.172.129.156
+abc     IN A    112.172.129.157.156
+
+
+[root@localhost named]# chown root:named dwb.com.zone
+[root@localhost named]# chown root:named ipname.zone
+
+ named-checkconf /etc/named.conf
+ named-checkzone dwb.com
+
+ named-checkzone dwb.com /var/named/dwb.com.zone
+ named-checkzone 129.172.112.in-addr.arpa /var/named/ipname.zone
+
+
+vi ipname.zone
+$TTL 1D
+@       IN SOA  dwb.com.        root (
+                                        0       ; serial
+                                        1D      ; refresh
+                                        1H      ; retry
+                                        1W      ; expire
+                                        3H )    ; minimum
+        IN NS   www.dwb.com
+156     IN PTR  dwb.com
+156     IN PTR  www.dwb.com
+157     IN PTR  abc.dwb.com
+
+
+
+/etc/named.rfc1912.zones
+
+zone "dwb.com" IN {
+        type master;
+        file "study.com.zone";
+        allow-update { none; };
+        allow-transfer { none; };
+};
+
+zone "129.172.112.in-addr.arpa" IN {
+        type master;
+        file "ipname.zone";
+        allow-update { none; };
+        allow-transfer { none; };
+};
+
+cp resolv.conf resolv.conf.backup
+
+resolv.conf 초기화 현상
+https://it-serial.tistory.com/9
+
+vi /etc/sysconfig/network-scripts/ifcfg-enp6s0
+cp resolv.conf resolv.conf.backup
+cp ifcfg-enp6s0 ifcfg-enp6s0.backup
+추가 NM_CONTROLLED=no
+
+https://it-serial.tistory.com/entry/Linux-DNS-Apache-Web-Server-%EC%A0%91%EC%86%8D
+
+centos7 DNS 서버 구축 & 도메인 설정
+https://it-serial.tistory.com/entry/Linux-CentOS-7-DNS-%EC%84%9C%EB%B2%84-%EA%B5%AC%EC%B6%95-%EB%8F%84%EB%A9%94%EC%9D%B8-%EC%84%A4%EC%A0%95
+
+168.126.63.1
+
+
+
+
+HTTPS SSL 인증서 발급 및 자동갱신
+https://blog.jiniworld.me/137
+
+
+Linux CentOS 7 Apache/Tomcat 7 mod_jk로 연동하기
+https://jane096.github.io/linux/tomcat-apache-connection/
+vi /etc/httpd/conf/workers.properties
+
+
+
+무료 free ssl
+https://foxydog.tistory.com/39
+
+무료 도메인
+https://blog.itcode.dev/posts/2021/08/18/freenom-domai
+dwb.tk
+dwb.ml

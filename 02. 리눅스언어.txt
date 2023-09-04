@@ -1,0 +1,24 @@
+01. 실행되어 있는 systemlist 보기
+system list-unit-files
+02. enable
+systemctl enable postgresql-10
+systemctl start postgresql-10
+systemctl restart postgresql-13
+sudo -u postgres psql -c"SELECT version();"
+
+
+	사용자전환		sudo -u postgres psql
+3.	파일명찾기	find / -name test 	
+	firewall중단	systemctl stop firewalld
+	현황확인		systemctl status firewalld
+	
+	cmd netstat -ano | findstr 5672
+	netstat -ano
+	cd C:\Users\doawi
+	taskkill /f /pid 7004
+	TCP    [::]:9080              [::]:0                 LISTENING       7004
+	TCP    [::]:9081              [::]:0                 LISTENING       7816	
+	
+4. pwd 		: 현재파일확인
+5. ls		: 디렉토리 리스트 확인
+6. ls -a	: 디렉토리 숨긴파일 포함하여 리스트 확인
