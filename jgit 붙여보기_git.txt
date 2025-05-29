@@ -303,7 +303,11 @@ https://www.eclipse.org/forums/index.php/t/1065371/
 	4) git add .
 	5) git commit -m "commit message"
 	6) git config --global user.email "you@example.com"
+           git config --global user.email "devcho@kotlinworld.com"
+
     7) git config --global user.name "Your Name"
+       git config --global user.name "Devcho"
+
 	**6) git branch -m master main
 	**6) git push origin main
 	
