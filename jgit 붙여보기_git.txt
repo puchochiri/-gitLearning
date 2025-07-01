@@ -302,10 +302,10 @@ https://www.eclipse.org/forums/index.php/t/1065371/
 	3) git pull https://github.com/puchochiri/todo-react-app.git main
 	4) git add .
 	5) git commit -m "commit message"
-	6) git config --global user.email "you@example.com"
+	6) git config --global user.email "doawishfor@naver.com"
            git config --global user.email "devcho@kotlinworld.com"
 
-    7) git config --global user.name "Your Name"
+    7) git config --global user.name "puchochiri"
        git config --global user.name "Devcho"
 
 	**6) git branch -m master main
