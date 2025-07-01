@@ -308,6 +308,8 @@ https://www.eclipse.org/forums/index.php/t/1065371/
     7) git config --global user.name "puchochiri"
        git config --global user.name "Devcho"
 
+	git config --list
+
 	**6) git branch -m master main
 	**6) git push origin main
 	
@@ -330,7 +332,8 @@ https://www.eclipse.org/forums/index.php/t/1065371/
 		
 		
 		git remote add origin
-		
+
+		git push origin main
 			C:\Users\doawi\Downloads\testtest>git push origin main
 			error: src refspec main does not match any
 			error: failed to push some refs to 'https://github.com/puchori/testtest.git'
