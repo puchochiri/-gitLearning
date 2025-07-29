@@ -1,0 +1,53 @@
+✅ 1단계: GitHub 저장소 만들기
+GitHub 접속 → 로그인
+
+우측 상단 + 클릭 → New repository
+
+저장소 이름 입력 (예: javaWeb01_20250630)
+
+README는 체크하지 마세요 (히스토리 충돌 방지)
+
+Create repository 클릭
+
+나오는 화면에서 HTTPS 주소 복사:
+👉 예: https://github.com/puchochiri/javaWeb01_20250630.git
+
+
+✅ 2단계: 로컬 프로젝트에 Git 연결
+cd ~/IdeaProjects/javaWeb01_20250630   # 해당 프로젝트 폴더로 이동
+git init                                # Git 초기화
+git remote add origin https://github.com/사용자명/저장소이름.git
+
+git remote add origin https://github.com/puchochiri/javaWeb01_20250630.git
+
+
+✅ 3단계: 파일 추가 및 커밋
+git add .                              # 모든 파일 Git에 추가
+git commit -m "첫 커밋 메시지"          # 커밋 메시지 작성
+
+✅ 4단계: GitHub로 푸시
+git branch -M main                     # 브랜치 이름을 main으로 변경 (권장)
+git push -u origin main                # GitHub로 푸시
+
+결 방법 (안전하게 병합하여 push)
+🔧 ① 원격 내용을 강제로 병합 (--allow-unrelated-histories)
+git pull origin main --allow-unrelated-histories
+
+
+🔧 ② 충돌이 있으면 직접 수정 후 다음을 실행
+git add .
+git commit -m "충돌 해결 및 병합"
+
+🔧 ③ 병합 후 push 실행
+git push origin main
+
+❗ 또는 깔끔하게 덮어쓰기 하고 싶다면 (⚠️ 위험, 주의!)
+git push -f origin main
+
+✅ 추천 방법 요약 (충돌 없애면서 병합)
+cd ~/IdeaProjects/javaWeb01_20250630
+git pull origin main --allow-unrelated-histories
+# 충돌 해결 후:
+git add .
+git commit -m "병합 후 첫 푸시"
+git push origin main
