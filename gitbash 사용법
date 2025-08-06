@@ -22,13 +22,16 @@ git remote add origin https://github.com/puchochiri/javaWeb01_20250630.git
 
 
 ✅ 3단계: 파일 추가 및 커밋
-git pull origin main
+
 
 git add .                              # 모든 파일 Git에 추가
 git commit -m "첫 커밋 메시지"          # 커밋 메시지 작성
 
 ✅ 4단계: GitHub로 푸시
 git branch -M main                     # 브랜치 이름을 main으로 변경 (권장)
+
+git pull origin main
+
 git push -u origin main                # GitHub로 푸시
 
 결 방법 (안전하게 병합하여 push)
