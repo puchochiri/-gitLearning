@@ -33,7 +33,7 @@ git pull origin main
 git add .                              # 모든 파일 Git에 추가
 git commit -m "첫 커밋 메시지"          # 커밋 메시지 작성
 
-git push -u origin main                # GitHub로 푸시
+git push origin main                # GitHub로 푸시
 
 ✅ 4단계: GitHub로 푸시
 
