@@ -21,7 +21,7 @@ git remote add origin https://github.com/사용자명/저장소이름.git
 git remote add origin https://github.com/puchochiri/javaWeb01_20250630.git
 
 
-git branch -M main                     # 브랜치 이름을 main으로 변경 (권장)
+git branch -m main                     # 브랜치 이름을 main으로 변경 (권장)
 
 
 git pull origin main
